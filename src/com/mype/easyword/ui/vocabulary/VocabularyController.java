@@ -31,4 +31,12 @@ public class VocabularyController {
         ObservableList<VocabularyRow> items = vocabularyListView.getItems();
         selectedItems.stream().forEach(selectedItem -> items.remove(selectedItem));
     }
+
+    public void addWord(ActionEvent actionEvent) {
+
+    }
+
+    public void removeWord(ActionEvent actionEvent) {
+
+    }
 }
