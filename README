@@ -1,0 +1,11 @@
+1. Add words, find their transcription and suggest translation
+2. Import words from ???
+3. Inner representation of vocabularies
+4. Excersises:
+	a. Flash cards: read the word, try to remembder correct translation
+	b. Translation variants: choose correct translation from the list of variants
+	c. Words Variants: choose words from the list of variants
+	d. Write word by Translation: write the word appropriate to the translation
+	e. Reverse Flash Cards: read the translation. Try to remember correct word
+	f. Alphabet soup: try to assemble correct words from the set of letters.
+	g. Write translation by word: read the word and write its translation
