@@ -1,5 +1,17 @@
-/* Application wide styles */
+/*constants*/
 
+/* Application wide styles */
+.controllButton {
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-border-radius: 20px;
+}
+
+.controlButtonAdd {
+    -fx-border-radius: 20px;
+    -fx-background-image: url("../images/background.jpg");
+}
+/*
 .label {
     -fx-font-size: 12px;
     -fx-font-weight: bold;
@@ -18,10 +30,10 @@
 .button:hover{
     -fx-base: #395bae;
 }
-
+  */
 /* Component specific styles */
 
-
+/*
 .main-panel {
     -fx-background-image: url("../images/background.jpg");
 }
@@ -31,4 +43,5 @@
     -fx-font-weight: bold;
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
+*/
 

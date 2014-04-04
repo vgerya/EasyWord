@@ -8,7 +8,7 @@
 
 <MigPane id="rootPane" fx:controller="com.mype.easyword.HelloController"
         styleClass="main-panel"
-        layout="insets 20"
+        layout="insets 20, debug"
         cols="[label, pref!][grow, 50::]"
         rows=""
         xmlns:fx="http://javafx.com/fxml">

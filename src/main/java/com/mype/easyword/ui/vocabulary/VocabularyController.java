@@ -3,17 +3,27 @@ package com.mype.easyword.ui.vocabulary;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MultipleSelectionModel;
 
+import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 
 /**
  * @author Vitaliy Gerya
  */
-public class VocabularyController {
+public class VocabularyController implements Initializable {
+    private ResourceBundle resources;
     @FXML
     private ListView<VocabularyRow> vocabularyListView;
+
+
+    @Override
+    public void initialize(final URL location, final ResourceBundle resources) {
+        this.resources = resources;
+    }
 
     @FXML
     public void addVocabulary(javafx.event.ActionEvent actionEvent) {
@@ -39,4 +49,5 @@ public class VocabularyController {
     public void removeWord(ActionEvent actionEvent) {
 
     }
+
 }
