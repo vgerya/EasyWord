@@ -1,5 +1,7 @@
 package com.mype.easyword.ui.vocabulary;
 
+import com.google.inject.Inject;
+import com.mype.easyword.service.VocabularyService;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +18,8 @@ import java.util.ResourceBundle;
  */
 public class VocabularyController implements Initializable {
     private ResourceBundle resources;
+    @Inject
+    private VocabularyService service;
     @FXML
     private ListView<VocabularyRow> vocabularyListView;
 
@@ -27,6 +31,7 @@ public class VocabularyController implements Initializable {
 
     @FXML
     public void addVocabulary(javafx.event.ActionEvent actionEvent) {
+        System.out.println(service == null);
         ObservableList<VocabularyRow> vocabularyList = vocabularyListView.getItems();
         VocabularyRow row = new VocabularyRow();
         // TODO get name from dialog;
