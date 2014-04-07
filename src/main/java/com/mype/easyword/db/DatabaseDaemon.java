@@ -1,6 +1,7 @@
 package com.mype.easyword.db;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import com.google.inject.persist.PersistService;
 import com.googlecode.flyway.core.Flyway;
 import org.hsqldb.server.Server;
@@ -14,11 +15,14 @@ public class DatabaseDaemon {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseDaemon.class);
 
     private static final String DB_ADDRESS = "127.0.0.1";
-    private static final String DB_NAME = "vocabulary";
     private static final String DB_PATH = "db/vocabulary";
     private static final int DB_PORT = 9191;
     private Flyway migration = new Flyway();
     private Server server;
+
+    @Inject
+    @Named("db.name")
+    private String dbName;
 
     @Inject
     private PersistService persistService;
@@ -26,7 +30,7 @@ public class DatabaseDaemon {
     public DatabaseDaemon() {
         logger.info("Initializing migration service.");
         migration.setDataSource("jdbc:hsqldb:file:" + DB_PATH, "sa", "");
-        migration.setSchemas(DB_NAME);
+        migration.setSchemas(dbName);
     }
 
     public void start() {
@@ -35,7 +39,7 @@ public class DatabaseDaemon {
             server = new Server();
             server.setAddress(DB_ADDRESS);
             server.setPort(DB_PORT);
-            server.setDatabaseName(0, DB_NAME);
+            server.setDatabaseName(0, dbName);
             server.setDatabasePath(0, DB_PATH);
             server.start();
         }
