@@ -3,6 +3,8 @@ package com.mype.easyword;
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import com.mype.easyword.db.DatabaseDaemon;
+import com.mype.easyword.db.dataaccess.VocabularyDAO;
+import com.mype.easyword.db.dataaccess.VocabularyDaoImpl;
 import com.mype.easyword.service.VocabularyService;
 import com.mype.easyword.service.VocabularyServiceImpl;
 import org.slf4j.Logger;
@@ -32,9 +34,14 @@ public class EasyWordModule extends AbstractModule {
         }
         // Binds our resource bundle that contains localized Strings
         bind(ResourceBundle.class).toInstance(ResourceBundle.getBundle("bundles.messages", Locale.getDefault()));
-        bind(DatabaseDaemon.class);// to(DatabaseDaemon.class);
 
+        // Business logic layer
+        bind(DatabaseDaemon.class);// to(DatabaseDaemon.class);
         bind(VocabularyService.class).to(VocabularyServiceImpl.class);
+
+
+        // Database Layer
+        bind(VocabularyDAO.class).to(VocabularyDaoImpl.class);
     }
 
     private Properties loadProperties(final String propertiesPath) throws IOException {

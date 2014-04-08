@@ -1,12 +1,11 @@
 package com.mype.easyword.db;
 
-import org.hibernate.annotations.Columns;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * @author Vitaliy Gerya
