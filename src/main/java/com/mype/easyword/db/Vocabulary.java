@@ -1,8 +1,11 @@
 package com.mype.easyword.db;
 
+import org.hibernate.annotations.Columns;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 
 /**
@@ -16,6 +19,9 @@ public class Vocabulary {
     private String name;
     @Column(name = "creationDate", nullable = false)
     private LocalDateTime creationDate;
+    @Column(name="word")
+    @OneToMany(mappedBy = "vocabularyId")
+    private Set<Word> words;
 
     @Id
     public long getId() {

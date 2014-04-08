@@ -14,10 +14,7 @@ import org.slf4j.LoggerFactory;
 public class DatabaseDaemon {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseDaemon.class);
 
-    private static final String DB_ADDRESS = "127.0.0.1";
-    private static final String DB_PATH = "db/vocabulary";
-    private static final int DB_PORT = 9191;
-    private Flyway migration = new Flyway();
+    private final Flyway migration = new Flyway();
     private Server server;
 
     @Inject
@@ -25,22 +22,45 @@ public class DatabaseDaemon {
     private String dbName;
 
     @Inject
+    @Named("db.address")
+    private String dbAddress;
+
+    @Inject
+    @Named("db.port")
+    private int dbPort;
+
+    @Inject
+    @Named("db.path")
+    private String dbPath;
+
+    @Inject
+    @Named("db.datasource")
+    private String dbDatasource;
+
+    @Inject
+    @Named("db.username")
+    private String dbUsername;
+
+    @Inject
+    @Named("db.password")
+    private String dbPassword;
+
+    @Inject
     private PersistService persistService;
 
+    @Inject
     public DatabaseDaemon() {
-        logger.info("Initializing migration service.");
-        migration.setDataSource("jdbc:hsqldb:file:" + DB_PATH, "sa", "");
-        migration.setSchemas(dbName);
+        // Cannot access fields annotated with @Inject here, they are null.
     }
 
     public void start() {
         if (server == null) {
             logger.info("Database starting...");
             server = new Server();
-            server.setAddress(DB_ADDRESS);
-            server.setPort(DB_PORT);
+            server.setAddress(dbAddress);
+            server.setPort(dbPort);
             server.setDatabaseName(0, dbName);
-            server.setDatabasePath(0, DB_PATH);
+            server.setDatabasePath(0, dbPath);
             server.start();
         }
         logger.info("Database started.");
@@ -49,6 +69,9 @@ public class DatabaseDaemon {
         persistService.start();
         logger.info("Persistence service started.");
 
+        logger.info("Initializing migration service.");
+        migration.setDataSource(dbDatasource, dbUsername, dbPassword);
+        migration.setSchemas(dbName);
         logger.info("Migration starting.");
         migration.migrate();
         logger.info("Migration started.");

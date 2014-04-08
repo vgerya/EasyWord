@@ -32,7 +32,6 @@ public class EasyWordModule extends AbstractModule {
         }
         // Binds our resource bundle that contains localized Strings
         bind(ResourceBundle.class).toInstance(ResourceBundle.getBundle("bundles.messages", Locale.getDefault()));
-
         bind(DatabaseDaemon.class);// to(DatabaseDaemon.class);
 
         bind(VocabularyService.class).to(VocabularyServiceImpl.class);
