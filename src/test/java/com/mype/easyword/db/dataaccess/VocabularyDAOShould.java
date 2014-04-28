@@ -1,9 +1,8 @@
 package com.mype.easyword.db.dataaccess;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.persist.jpa.JpaPersistModule;
-import com.mycila.testing.plugin.atunit.container.GuiceContainer;
+import com.mycila.testing.plugin.guice.GuiceContext;
 import com.mype.easyword.EasyWordModule;
 import com.mype.easyword.db.Vocabulary;
 import org.junit.After;
@@ -19,15 +18,16 @@ import static org.fest.assertions.api.Assertions.assertThat;
 /**
  * @author Vitaliy Gerya
  */
-@ContainerClass(GuiceContainer.class)
-@MockFrameworkClass(MockitoFramework.class)
+//@ContainerClass(GuiceContainer.class)
+//@MockFrameworkClass(MockitoFramework.class)
+@GuiceContext({EasyWordModule.class, JpaPersistModule.class})
 public class VocabularyDAOShould {
     @Inject
     private VocabularyDAO vocabularyDAO;
 
     @Before
     public void setUp() throws Exception {
-        Guice.createInjector(new EasyWordModule(), new JpaPersistModule("VocabularyUnit"));
+//        Guice.createInjector(new EasyWordModule(), new JpaPersistModule("VocabularyUnit"));
     }
 
     @After
@@ -40,8 +40,6 @@ public class VocabularyDAOShould {
             loadStrategy = CleanInsertLoadStrategy.class)
     public void returnEmptyListIfNoVocabulariesArePresented() throws Exception {
         Collection<Vocabulary> allVocabularies = vocabularyDAO.getAll();
-
-        atunit.core.Container
 
         assertThat(allVocabularies).isNotNull().isEmpty();
     }
